@@ -5,7 +5,7 @@ export default function Footer() {
     const fullYear = getFullYear();
 
     return (
-        <footer className="border-t border-zinc-100">
+        <footer className="bg-zinc-900">
             <div className="flex items-center justify-center py-5 text-center text-xs text-zinc-100">
                 © {fullYear} qwrtsdev. All rights reserved.
                 &nbsp;&nbsp;

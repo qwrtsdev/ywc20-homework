@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body
-                className={`${LineSeed.className} relative h-screen w-screen overflow-hidden bg-[#190200] antialiased`}
+                className={`${LineSeed.className} relative h-screen w-screen overflow-hidden bg-zinc-900 antialiased`}
             >
                 <div className="scrollbar-hide h-full w-full overflow-auto">
                     {children}
