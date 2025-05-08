@@ -7,8 +7,7 @@ export default function Footer() {
     return (
         <footer className="bg-zinc-900">
             <div className="flex items-center justify-center py-5 text-center text-xs text-zinc-100">
-                © {fullYear} qwrtsdev. All rights reserved.
-                &nbsp;&nbsp;
+                © {fullYear} qwrtsdev. All rights reserved. &nbsp;&nbsp;
                 <a
                     href="https://github.com/qwrtsdev/ywc20-homework"
                     target="_blank"

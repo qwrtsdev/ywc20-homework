@@ -136,18 +136,22 @@
 
 @layer utilities {
     .scrollbar::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
     }
 
     .scrollbar::-webkit-scrollbar-track {
-        background: #272727;
+        background: #151515;
         padding-left: 10px;
         padding-right: 10px;
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
-        background: #686868;
+        background: #252525;
         border-radius: 100vh;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        width: 0px;
+        display: none;
     }
 }

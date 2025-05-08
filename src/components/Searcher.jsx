@@ -3,21 +3,24 @@
 import { useState, useEffect } from "react";
 import { IdCard, LoaderCircle } from "lucide-react";
 
-export default function Searcher() {
+function majorName(str = "") {
+    return str.replace(/_/g, " ").replace(/\b\w/g, (chr) => chr.toUpperCase());
+}
+
+export default function Searcher({ candidates }) {
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/api/candidates")
-            .then((res) => res.json())
-            .then((json) => {
-                setData(json);
-                setFilteredData(json);
-            })
-            .catch((err) => console.error(err))
-            .finally(() => setLoading(false));
+        try {
+            setData(candidates);
+            setFilteredData(candidates);
+            setLoading(false);
+        } catch (error) {
+            console.error(err);
+        }
     }, []);
 
     const handleSearch = () => {
@@ -53,17 +56,17 @@ export default function Searcher() {
                         type="text"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="h-full w-full rounded-sm border-0 bg-zinc-100"
+                        className="h-full w-full rounded-sm border-0 bg-zinc-100 px-3 py-1"
                         placeholder="พิมพ์ชื่อหรือ ID ผู้สมัคร"
                     />
                     <button
                         onClick={handleSearch}
-                        className="custom-bg rounded-md px-2 py-1 text-white"
+                        className="custom-bg rounded-md px-3 py-1 text-white"
                     >
                         ค้นหา
                     </button>
                 </div>
-                <div className="flex h-[25rem] items-center justify-center overflow-scroll overflow-x-hidden bg-zinc-950 text-center">
+                <div className="scrollbar-hide flex h-[25rem] items-center justify-center overflow-scroll overflow-x-hidden bg-zinc-950 text-center">
                     <p className="text-white">
                         <LoaderCircle
                             color="#f4f4f5"
@@ -102,19 +105,20 @@ export default function Searcher() {
                             {items.map((person, idx) => (
                                 <div
                                     key={idx}
-                                    className="flex flex-row justify-between p-4 text-white odd:bg-zinc-950 even:bg-zinc-900"
+                                    className="flex flex-row justify-between border-b border-zinc-900 bg-zinc-950 p-4 text-white first:border-t last:border-0 hover:bg-[#111115]"
                                 >
                                     <span>
-                                        <p className="overflow-hidden text-ellipsis">
+                                        <p className="overflow-hidden font-bold text-ellipsis">
                                             {person.firstName} {person.lastName}
                                         </p>
-                                        <p className="overflow-hidden text-ellipsis">
-                                            ID: {person.interviewRefNo}
+                                        <p className="overflow-hidden text-xs text-ellipsis">
+                                            {person.interviewRefNo} &#x2022;{" "}
+                                            {majorName(person.major)}
                                         </p>
                                     </span>
 
-                                    <button className="rounded-md bg-zinc-100 px-3 py-2">
-                                        <IdCard color="#09090b" />
+                                    <button className="rounded-md bg-zinc-100 px-3 py-1">
+                                        <IdCard color="#09090b" size={22} />
                                     </button>
                                 </div>
                             ))}
