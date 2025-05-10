@@ -1,13 +1,13 @@
 "use client";
 
 import { AspectRatio } from "./ui/aspect-ratio";
-import { useState } from "react";
+import { userStore } from "@/lib/store/user";
 import { Camera } from "lucide-react";
 
 export default function IDCard() {
-    const [data, setData] = useState(null);
+    const user = userStore((state) => state.user);
 
-    if (!data) {
+    if (!user.id) {
         return (
             <div className="flex flex-col gap-4">
                 <AspectRatio
@@ -31,7 +31,9 @@ export default function IDCard() {
             <AspectRatio
                 ratio={16 / 9}
                 className="flex w-full items-center justify-center rounded-md border bg-zinc-950 text-center"
-            ></AspectRatio>
+            >
+                <p className="text-white">{user.full_name}</p>
+            </AspectRatio>
 
             <div className="text-center">
                 <button className="custom-bg rounded-md px-3 py-2 font-semibold text-white">
