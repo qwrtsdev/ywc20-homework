@@ -17,13 +17,14 @@ export default function Searcher() {
     useEffect(() => {
         try {
             const baseUrl = getBaseUrl();
-            const response = fetch(`${baseUrl}/api/candidates`)
-                .then((response) => response.json())
-                .then((candidateData) => {
-                    setData(candidateData);
-                    setFilteredData(candidateData);
-                });
-            setLoading(false);
+            fetch(`${baseUrl}/api/candidates`)
+                .then((res) => res.json())
+                .then((json) => {
+                    setData(json);
+                    setFilteredData(json);
+                })
+                .catch((err) => console.error(err))
+                .finally(() => setLoading(false));
         } catch (error) {
             console.error(error);
         }
