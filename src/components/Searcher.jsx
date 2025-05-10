@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { IdCard, LoaderCircle } from "lucide-react";
+import { getBaseUrl } from "@/lib/getBaseUrl";
 
 function majorName(str = "") {
     return str.replace(/_/g, " ").replace(/\b\w/g, (chr) => chr.toUpperCase());
 }
 
-export default function Searcher({ candidates }) {
+export default function Searcher() {
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
@@ -15,11 +16,16 @@ export default function Searcher({ candidates }) {
 
     useEffect(() => {
         try {
-            setData(candidates);
-            setFilteredData(candidates);
+            const baseUrl = getBaseUrl();
+            const response = fetch(`${baseUrl}/api/candidates`)
+                .then((response) => response.json())
+                .then((candidateData) => {
+                    setData(candidateData);
+                    setFilteredData(candidateData);
+                });
             setLoading(false);
         } catch (error) {
-            console.error(err);
+            console.error(error);
         }
     }, []);
 
@@ -49,6 +55,38 @@ export default function Searcher({ candidates }) {
     };
 
     if (loading) {
+        return (
+            <div className="flex w-full flex-col overflow-clip rounded-md">
+                <div className="flex w-full flex-row gap-4 bg-zinc-800 p-4">
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="h-full w-full rounded-sm border-0 bg-zinc-100 px-3 py-1"
+                        placeholder="พิมพ์ชื่อหรือ ID ผู้สมัคร"
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="custom-bg rounded-md px-3 py-1 text-white"
+                    >
+                        ค้นหา
+                    </button>
+                </div>
+                <div className="scrollbar-hide flex h-[25rem] items-center justify-center overflow-scroll overflow-x-hidden bg-zinc-950 text-center">
+                    <p className="text-white">
+                        <LoaderCircle
+                            color="#f4f4f5"
+                            size={12}
+                            className="inline animate-spin"
+                        />{" "}
+                        กำลังโหลด..
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!filteredData) {
         return (
             <div className="flex w-full flex-col overflow-clip rounded-md">
                 <div className="flex w-full flex-row gap-4 bg-zinc-800 p-4">

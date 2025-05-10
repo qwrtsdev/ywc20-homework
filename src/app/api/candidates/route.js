@@ -11,8 +11,6 @@ export async function GET() {
             }
         );
 
-        console.log(res);
-
         return new Response(
             JSON.stringify(res.data),
             {
