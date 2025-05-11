@@ -41,7 +41,6 @@ export default function IDCard() {
             link.click();
             document.body.removeChild(link);
         } catch (error) {
-            console.error("Capture failed:", error);
             toast("เกิดข้อผิดพลาดในการดาวน์โหลด", {
                 description: error.message,
             });
