@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { X, Save } from "lucide-react";
 import { userStore } from "@/lib/store/user";
 import { useRef } from "react";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import { toast } from "sonner";
 
 function majorName(str = "") {
@@ -30,16 +30,18 @@ export default function IDCard() {
         if (!captureRef.current) return;
 
         try {
-            const canvas = await html2canvas(captureRef.current);
-            const imgData = canvas.toDataURL("image/png");
+            const dataUrl = await toPng(captureRef.current, {
+                cacheBust: true,
+            });
 
             const link = document.createElement("a");
-            link.href = imgData;
+            link.href = dataUrl;
             link.download = `${user.id}_card.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         } catch (error) {
+            console.error("Capture failed:", error);
             toast("เกิดข้อผิดพลาดในการดาวน์โหลด", {
                 description: error.message,
             });
