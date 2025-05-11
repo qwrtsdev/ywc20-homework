@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const LineSeed = localFont({
     src: [
@@ -18,7 +19,8 @@ const LineSeed = localFont({
 
 export const metadata = {
     title: "YWC20: Homework",
-    description: "การบ้านสำหรับส่งช่วงสัมภาษณ์สำหรับค่าย Young Webmaster Camp 20",
+    description:
+        "การบ้านสำหรับส่งช่วงสัมภาษณ์สำหรับค่าย Young Webmaster Camp 20",
 };
 
 export default function RootLayout({ children }) {
@@ -30,6 +32,7 @@ export default function RootLayout({ children }) {
                 <div className="scrollbar-hide h-full w-full overflow-auto">
                     {children}
                 </div>
+                <Toaster />
             </body>
         </html>
     );

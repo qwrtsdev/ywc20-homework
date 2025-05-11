@@ -95,7 +95,7 @@ export default function Searcher() {
                     </div>
                     <button
                         onClick={handleSearch}
-                        className="custom-bg rounded-md px-3 py-1 text-white"
+                        className="custom-bg rounded-md px-3 py-1 text-white hover:brightness-75"
                     >
                         ค้นหา
                     </button>
@@ -134,7 +134,7 @@ export default function Searcher() {
                     </div>
                     <button
                         onClick={handleSearch}
-                        className="custom-bg rounded-md px-3 py-1 text-white"
+                        className="custom-bg rounded-md px-3 py-1 text-white hover:brightness-75"
                     >
                         ค้นหา
                     </button>
@@ -177,7 +177,7 @@ export default function Searcher() {
                     </div>
                     <button
                         onClick={handleSearch}
-                        className="custom-bg rounded-md px-3 py-1 text-white"
+                        className="custom-bg rounded-md px-3 py-1 text-white hover:brightness-75"
                     >
                         ค้นหา
                     </button>
@@ -219,7 +219,7 @@ export default function Searcher() {
                 </div>
                 <button
                     onClick={handleSearch}
-                    className="custom-bg rounded-md px-3 py-1 text-white"
+                    className="custom-bg rounded-md px-3 py-1 text-white hover:brightness-75"
                 >
                     ค้นหา
                 </button>
